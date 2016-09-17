@@ -1,0 +1,27 @@
+{
+  "name": "kiosk",
+  "version": "1.0.0",
+  "description": "Simple app for asking questions at TEDxPurdueU event entrances",
+  "main": "main.js",
+  "scripts": {
+    "test": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TEDxPurdueU/kiosk.git"
+  },
+  "author": "Linus Lee <linus@thesephist.com>",
+  "license": "SEE LICENSE IN LICENSE",
+  "bugs": {
+    "url": "https://github.com/TEDxPurdueU/kiosk/issues"
+  },
+  "homepage": "https://github.com/TEDxPurdueU/kiosk#readme",
+  "dependencies": {
+    "backbone": "^1.3.3",
+    "express": "^4.14.0",
+    "http": "0.0.0",
+    "jquery": "^3.1.0",
+    "json-server": "^0.8.21",
+    "underscore": "^1.8.3"
+  }
+}
