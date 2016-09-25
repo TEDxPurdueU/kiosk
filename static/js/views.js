@@ -74,6 +74,10 @@ Kiosk.views.QuestionList = Kiosk.views.Base.extend({
     render: function() {
         this.$el.innerHTML = this.template;
 
+        Kiosk.objects.questions.each(function(questionModel) {
+            this.$el.append(new Kiosk.views.QuestionBlock({ model: questionModel }));
+        }.bind(this));
+
         return this;
     }
 
@@ -144,5 +148,3 @@ Kiosk.views.Choice = Kiosk.views.Base.extend({
     }
 
 });
-
-
