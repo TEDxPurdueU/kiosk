@@ -10,11 +10,11 @@ var paths = {
         'static/js/libs/jquery.js',
         'static/js/libs/underscore.js',
         'static/js/libs/backbone.js',
-        'static/js/config.js',
+        'static/js/init.js',
         'static/js/utils.js',
+        'static/js/config.js',
         'static/js/models.js',
         'static/js/views.js',
-        'static/js/init.js',
         'static/js/main.js'
     ],
     styles: [
@@ -22,9 +22,7 @@ var paths = {
     ]
 };
 
-gulp.task('default', function() {
-    console.log("Default task");
-})
+gulp.task('default', ['compile-styles', 'compile-scripts']);
 
 gulp.task('compile-styles', function() {
     return gulp.src(paths.styles)

@@ -7,13 +7,12 @@
  * kiosk.tedxpurdueu.com
  */
 
-var jsonServer = require("json-server"),
-    app = jsonServer.create(),
-    router = jsonServer.router("db.json"),
-    middlewares = jsonServer.defaults();
+var express = require('express'),
+    jsonServer = require('json-server');
 
-app.use(middlewares);
-app.use("/api", router);
+var app = express();
 
-app.listen(2017, () => console.log("Kiosk started!"));
+app.use('/api', jsonServer.router('db.json'));
+app.use('/', express.static('static'));
 
+app.listen(2017, () => console.log('Kiosk started!'));

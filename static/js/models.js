@@ -1,6 +1,6 @@
 /**
  * Backbone models and collections
- * 
+ *
  * - User model
  * - Users collection
  *
@@ -13,7 +13,7 @@
  */
 
 Kiosk.models.User = Kiosk.models.Base.extend({
-  
+
     urlRoot: "/api/users",
 
     initialize: function() {
@@ -41,24 +41,32 @@ Kiosk.collections.Users = Kiosk.collections.Base.extend({
         this.add(user);
 
         return user;
-    }
+    },
+
+    model: Kiosk.models.User
 
 });
 
 Kiosk.models.Question = Kiosk.models.Base.extend({
-  
+
     urlRoot: "/api/questions",
 
-    getChoices: function() {
+    initialize: function() {
+        this.listenTo(Kiosk.objects.choices, 'sync', this.setChoices);
+    },
+
+    setChoices: function() {
         var choices = Kiosk.objects.choices.where({questionId: this.id});
-        return choices;
+        this.set('choices', new Kiosk.collections.Choices(choices));
     }
 
 });
 
 Kiosk.collections.Questions = Kiosk.collections.Base.extend({
-    
-    url: "/api/questions"
+
+    url: "/api/questions",
+
+    model: Kiosk.models.Question
 
 });
 
@@ -69,9 +77,9 @@ Kiosk.models.Choice = Kiosk.models.Base.extend({
 });
 
 Kiosk.collections.Choices = Kiosk.collections.Base.extend({
-    
-    url: "/api/choices"
+
+    url: "/api/choices",
+
+    model: Kiosk.models.Choice
 
 });
-
-

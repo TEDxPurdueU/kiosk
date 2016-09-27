@@ -4,6 +4,7 @@
   "description": "Simple app for asking questions at TEDxPurdueU event entrances",
   "main": "main.js",
   "scripts": {
+    "start": "node main.js",
     "test": "node main.js"
   },
   "repository": {

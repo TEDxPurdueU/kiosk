@@ -19,5 +19,5 @@ Kiosk.header = new Kiosk.views.Header();
 Kiosk.questionList = new Kiosk.views.QuestionList();
 
 // attach views
-$("#content").append(Kiosk.header)
-             .append(Kiosk.questionList);
+$("#content").append(Kiosk.header.render().$el)
+             .append(Kiosk.questionList.render().$el);
