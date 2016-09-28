@@ -5,21 +5,20 @@ $header-height: 80px;
 $brand-color: #e62b1e;
 
 @mixin brand-button {
-    
+
     font-family: $font-family;
-    height: 60px;
+    background: #fff;
+    font-size: 20px;
+    height: 50px;
     padding: 0 12px;
-    line-height: 60px;
-    background: #ccc;
-    
+    line-height: 50px;
+    color: $brand-color;
     border-radius: 3px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+    outline: none;
+    border: none;
+    cursor: pointer;
     transition: transform .2s, -webkit-transform .2s, box-shadow .2s;
-
-    &.color {
-        background: $brand-color;
-        color: white;
-    }
 
     &:hover, &:active {
         box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.3);
@@ -31,4 +30,3 @@ $brand-color: #e62b1e;
         opacity: 0.7;
     }
 }
-
