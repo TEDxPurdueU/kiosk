@@ -23,9 +23,9 @@ Kiosk.views.Header = Kiosk.views.Base.extend({
     className: "header",
 
     template: `
-      <div class="logo">Kiosk for ${Kiosk.configs.eventName}</div>
+      <div class="logo">Kiosk <span class="eventName">for ${Kiosk.configs.eventName}</span></div>
 
-      <button class="complete">SUBMIT</button>
+      <button class="complete colored">SUBMIT</button>
       <button class="help">HELP</button>
     `,
 
@@ -136,16 +136,28 @@ Kiosk.views.Choice = Kiosk.views.Base.extend({
     className: "choice",
 
     template: `<input type="checkbox"></input>
-      <span></span>`,
+      <label></label>`,
+
+    events: {
+        'click input': 'checkClick'
+    },
 
     initialize: function() {
 
     },
 
+    checkClick: function(evt) {
+        if (evt.target.checked) {
+            Kiosk.currentChoices.push(this.model.id);
+        } else {
+            Kiosk.currentChoices.splice(Kiosk.currentChoices.indexOf(this.model.id), 1);
+        }
+    },
+
     render: function() {
         this.$el.html(this.template);
         this.$('input').val(this.model.id);
-        this.$('span').html(this.model.get('value'));
+        this.$('label').html(this.model.get('value'));
 
         return this;
     }

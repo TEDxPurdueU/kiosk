@@ -2,7 +2,12 @@ $font-family: "Source Sans Pro", "Arial", sans-serif;
 
 // layout
 $header-height: 80px;
+$header-height-mobile: 52px;
+
+// colors
 $brand-color: #e62b1e;
+$brand-color-dark: #900000;
+$text-color: #666;
 
 @mixin brand-button {
 
@@ -10,7 +15,7 @@ $brand-color: #e62b1e;
     background: #fff;
     font-size: 20px;
     height: 50px;
-    padding: 0 12px;
+    padding: 0 20px;
     line-height: 50px;
     color: $brand-color;
     border-radius: 3px;
@@ -20,8 +25,13 @@ $brand-color: #e62b1e;
     cursor: pointer;
     transition: transform .2s, -webkit-transform .2s, box-shadow .2s;
 
+    &.colored {
+        background: $brand-color-dark;
+        color: #fff;
+    }
+
     &:hover, &:active {
-        box-shadow: 0 4px 8px 3px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 10px 8px -2px rgba(0, 0, 0, 0.3);
         transform: translateY(-3px);
         -webkit-transform: translateY(-3px);
     }

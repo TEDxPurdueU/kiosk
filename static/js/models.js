@@ -25,7 +25,7 @@ Kiosk.models.User = Kiosk.models.Base.extend({
     addChoices: function(choiceArray) {
         choiceArray.forEach(function(choice) {
             this.get("choices").push(choice.id);
-        });
+        }.bind(this));
 
         return this;
     }

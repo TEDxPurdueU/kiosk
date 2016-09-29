@@ -16,6 +16,7 @@
     box-shadow: 0 4px 6px -2px rgba(0, 0, 0, 0.3);
     color: #fff;
     padding: 0 10%;
+    overflow: hidden;
 
     .logo {
         height: $header-height;
@@ -40,7 +41,9 @@
 
     .question {
         text-align: center;
-        margin-bottom: 20px;
+        margin: 20px 0;
+        font-size: 36px;
+        color: $text-color;
     }
 
     .choices {
@@ -48,25 +51,84 @@
         flex-direction: row;
         flex-wrap: wrap;
 
-        .choice input[type='checkbox'] {
-            opacity: 0;
+        .choice {
             position: relative;
-            height: 100px;
-            width: 300px;
+            float: left;
+            width: 50%;
 
-            &::after {
-                content: "";
+            input[type='checkbox'] {
+                position: relative;
+                height: calc(100px - 12px);
+                width: calc(100% - 12px);
+                margin: 6px;
+                cursor: pointer;
+
+                &::after {
+                    content: "";
+                    display: block;
+                    height: 100%;
+                    width: 100%;
+                    top: 0;
+                    left: 0;
+                    border-radius: 4px;
+                    background: #e9e9e9;
+                    transition: background .4s;
+                }
+
+                &:checked::after {
+                    background: $brand-color;
+                }
+
+                &:checked + label {
+                    color: #fff;
+                }
+            }
+
+            label {
+                position: absolute;
                 display: block;
-                height: 100%;
+                font-size: 20px;
+                top: 0;
+                left: 0;
                 width: 100%;
-                border-radius: 4px;
-                transition: background .4s;
+                height: 100%;
+                pointer-events: none;
+                text-align: center;
+                line-height: 100px;
             }
 
-            &:checked::after {
-                background: $brand-color;
-                color: white;
-            }
         }
     }
+}
+
+@media only screen and (max-width: 830px) {
+
+    .header {
+        padding: 0 12px;
+    }
+
+}
+
+@media only screen and (max-width: 680px) {
+
+    .header {
+        height: $header-height-mobile;
+
+        .logo {
+            height: $header-height-mobile;
+            line-height: $header-height-mobile;
+            font-size: 30px;
+
+            .eventName {
+                display: none;
+            }
+        }
+
+        button {
+            margin: 10px 0 10px 12px;
+            height: 32px;
+            line-height: 32px;
+        }
+    }
+
 }
