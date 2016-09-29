@@ -54,7 +54,7 @@ Kiosk.models.Question = Kiosk.models.Base.extend({
     urlRoot: "/api/questions",
 
     initialize: function() {
-        this.listenTo(Kiosk.objects.choices, 'sync', this.setChoices);
+        this.listenTo(Kiosk.objects.choices, 'update', this.setChoices);
     },
 
     setChoices: function() {
