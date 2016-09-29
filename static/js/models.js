@@ -18,14 +18,16 @@ Kiosk.models.User = Kiosk.models.Base.extend({
 
     initialize: function() {
         this.set("eventId", Kiosk.configs.eventId);
-        this.set("timestamp", new Date().getTime() / 1000);
+        this.set("timestamp", parseInt(new Date().getTime() / 1000));
         this.set("choices", []);
     },
 
     addChoices: function(choiceArray) {
-        choiceArray.forEach(function(choice) {
-            this.get("choices").push(choice.id);
-        }.bind(this));
+        var userChoicesList = this.get('choices');
+
+        choiceArray.forEach(choice => {
+            userChoicesList.push(choice);
+        });
 
         return this;
     }

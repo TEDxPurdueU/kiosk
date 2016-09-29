@@ -45,8 +45,9 @@ Kiosk.views.Header = Kiosk.views.Base.extend({
     submitUser: function(evt) {
         Kiosk.currentUser.addChoices(Kiosk.currentChoices).save();
 
-        Kiosk.currentUser = new Kiosk.objects.users.new();
+        Kiosk.currentUser = Kiosk.objects.users.new();
         Kiosk.currentChoices = [];
+        Kiosk.questionList.render();
     },
 
     render: function() {
