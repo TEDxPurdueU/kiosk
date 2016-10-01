@@ -120,7 +120,7 @@ Kiosk.views.QuestionBlock = Kiosk.views.Base.extend({
     `,
 
     initialize: function() {
-          this.listenTo(Kiosk.objects.choices, 'sync', this.render);
+          this.listenTo(Kiosk.objects.choices, 'update', this.render);
     },
 
     render: function() {
