@@ -182,7 +182,6 @@ Kiosk.views.ResultBlock = Kiosk.views.Base.extend({
         if (!choices) return this;
 
         let counts = choices.map(choiceModel => {
-                // TODO this could be massively optimized by looping through users rather than choices
                 let count = 0;
                 Kiosk.objects.users.each(userModel => {
                     if (userModel.get('choices').includes(choiceModel.id)) count++;
@@ -191,7 +190,7 @@ Kiosk.views.ResultBlock = Kiosk.views.Base.extend({
                 return count;
         });
 
-        if (!this.chart) this.chart = new Chart(this.$('canvas'), {
+        this.chart = new Chart(this.$('canvas'), {
             type: 'bar',
             data: {
                 labels: choices.map(choiceModel => choiceModel.get('value')),
@@ -203,6 +202,15 @@ Kiosk.views.ResultBlock = Kiosk.views.Base.extend({
                     borderColor: "#e62b1e",
                     boderWidth: 2,
                  }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
         });
     },
