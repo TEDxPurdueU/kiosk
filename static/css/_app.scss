@@ -113,23 +113,46 @@
                 text-overflow: ellipsis;
                 white-space: nowrap;
             }
-
         }
     }
+}
 
-    .footer {
+.result-list {
+    width: 65%;
+    min-width: 300px;
+    max-width: 800px;
+    margin: 0 auto;
+
+    .result-block {
+        margin-bottom: 52px;
+    }
+
+    .question {
         text-align: center;
-        width: 100%;
-        color: #777;
-        font-size: 18px;
-        margin-bottom: 28px;
+        margin: 20px 0;
+        font-size: 36px;
+        color: $text-color;
+    }
+    
+    canvas {
+        width: 100% !important;
+        height: 400px !important;
+        display: block;
+    }
+}
 
-        a {
-            color: $brand-color;
+.footer {
+    text-align: center;
+    width: 100%;
+    color: #777;
+    font-size: 18px;
+    margin-bottom: 28px;
 
-            &:hover {
-                opacity: .9;
-            }
+    a {
+        color: $brand-color;
+
+        &:hover {
+            opacity: .9;
         }
     }
 }
@@ -239,9 +262,10 @@
             font-size: 20px;
         }
 
-        footer {
-            font-size: 16px;
-        }
+    }
+
+    footer {
+        font-size: 16px;
     }
 
 }

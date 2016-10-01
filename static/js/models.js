@@ -1,16 +1,4 @@
-/**
- * Backbone models and collections
- *
- * - User model
- * - Users collection
- *
- * - Question model
- * - Questions collection
- *
- * - Choice model
- * - Choices collection
- *
- */
+// Backbone models and collections
 
 Kiosk.models.User = Kiosk.models.Base.extend({
 
@@ -19,7 +7,7 @@ Kiosk.models.User = Kiosk.models.Base.extend({
     initialize: function() {
         this.set("eventId", Kiosk.configs.eventId);
         this.set("timestamp", parseInt(new Date().getTime() / 1000));
-        this.set("choices", []);
+        if (this.isNew()) this.set("choices", []);
     },
 
     addChoices: function(choiceArray) {

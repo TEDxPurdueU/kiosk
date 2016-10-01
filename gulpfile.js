@@ -6,12 +6,22 @@ var gulp = require('gulp'),
     sass = require('gulp-sass');
 
 var paths = {
+    resultScripts: [
+      'static/js/libs/jquery.js',
+      'static/js/libs/underscore.js',
+      'static/js/libs/backbone.js',
+      'static/js/libs/chart.js',
+      'static/js/init.js',
+      'static/js/config.js',
+      'static/js/models.js',
+      'static/js/views.js',
+      'static/js/results.js'
+    ],
     scripts: [
         'static/js/libs/jquery.js',
         'static/js/libs/underscore.js',
         'static/js/libs/backbone.js',
         'static/js/init.js',
-        'static/js/utils.js',
         'static/js/config.js',
         'static/js/models.js',
         'static/js/views.js',
@@ -22,7 +32,7 @@ var paths = {
     ]
 };
 
-gulp.task('default', ['compile-styles', 'compile-scripts']);
+gulp.task('default', ['compile-styles', 'compile-scripts', 'compile-results']);
 
 gulp.task('compile-styles', function() {
     return gulp.src(paths.styles)
@@ -38,6 +48,16 @@ gulp.task('compile-scripts', function() {
             .pipe(babel({ presets: ['es2015'] }))
             .pipe(uglify().on('error', function(err){throw err;}))
             .pipe(concat('static/js/main.min.js'))
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('./'));
+});
+
+gulp.task('compile-results', function() {
+    return gulp.src(paths.resultScripts)
+        .pipe(sourcemaps.init())
+            .pipe(babel({ presets: ['es2015'] }))
+        //    .pipe(uglify().on('error', function(err){throw err;}))
+            .pipe(concat('static/js/results.min.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./'));
 });

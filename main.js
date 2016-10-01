@@ -12,6 +12,12 @@ var express = require('express'),
 
 var app = express();
 
+// url rewrites
+app.use('/results/', function(req, res, next) {
+    req.url += '.html'; // naive but effective
+    next();
+});
+
 app.use('/api', jsonServer.router('db.json'));
 app.use('/', express.static('static'));
 
