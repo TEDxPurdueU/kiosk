@@ -56,7 +56,7 @@ gulp.task('compile-results', function() {
     return gulp.src(paths.resultScripts)
         .pipe(sourcemaps.init())
             .pipe(babel({ presets: ['es2015'] }))
-        //    .pipe(uglify().on('error', function(err){throw err;}))
+            .pipe(uglify().on('error', function(err){throw err;}))
             .pipe(concat('static/js/results.min.js'))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./'));
