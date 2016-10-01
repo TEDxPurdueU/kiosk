@@ -90,6 +90,7 @@ Kiosk.views.QuestionList = Kiosk.views.Base.extend({
 
     initialize: function() {
         this.listenTo(Kiosk.objects.questions, 'sync', this.render);
+        this.listenTo(Kiosk.objects.choices, 'update', this.render);
     },
 
     render: function() {
@@ -119,10 +120,6 @@ Kiosk.views.QuestionBlock = Kiosk.views.Base.extend({
       </div>
     `,
 
-    initialize: function() {
-          this.listenTo(Kiosk.objects.choices, 'update', this.render);
-    },
-
     render: function() {
         this.$el.html(this.template);
 
@@ -142,6 +139,7 @@ Kiosk.views.ResultList = Kiosk.views.Base.extend({
 
     initialize: function() {
         this.listenTo(Kiosk.objects.questions, 'sync', this.render);
+        this.listenTo(Kiosk.objects.choices, 'update', this.render);
     },
 
     render: function() {
@@ -172,14 +170,6 @@ Kiosk.views.ResultBlock = Kiosk.views.Base.extend({
     <canvas>
     </canvas>
     `,
-
-    initialize: function() {
-        this.listenTo(Kiosk.objects.choices, 'update', this.what);
-    },
-
-    what: function() {
-        setTimeout(this.renderChart.bind(this), 3000);
-    },
 
     renderChart: function() {
         let choices = this.model.get('choices');
@@ -222,6 +212,8 @@ Kiosk.views.ResultBlock = Kiosk.views.Base.extend({
     render: function() {
         this.$el.html(this.template);
         this.$('.question').html(this.model.get('text'));
+
+        setTimeout(this.renderChart.bind(this), 100);
 
         return this;
     }
