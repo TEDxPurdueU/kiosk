@@ -16,6 +16,9 @@
  * - Choice view
  *   .choice
  *
+ * - Modal view
+ *   .modal
+ *
  */
 
 Kiosk.views.Header = Kiosk.views.Base.extend({
@@ -23,7 +26,9 @@ Kiosk.views.Header = Kiosk.views.Base.extend({
     className: "header",
 
     template: `
-      <div class="logo">Kiosk <span class="eventName">for ${Kiosk.configs.eventName}</span></div>
+      <a href="/">
+        <div class="logo">Kiosk <span class="eventName">for ${Kiosk.configs.eventName}</span></div>
+      </a>
 
       <button class="complete colored">SUBMIT</button>
       <button class="help">HELP</button>
@@ -34,15 +39,20 @@ Kiosk.views.Header = Kiosk.views.Base.extend({
         "click button.help": "help"
     },
 
-    initialize: function() {
-
-    },
-
     help: function(evt) {
-
+        Kiosk.modal.open({
+            title: 'Kiosk Help',
+            body: `
+              Kiosk is a simple, lightweight survey web application.
+              <br><br>
+              For each question, select all the answers that you think apply, and hit "SUBMIT"!
+            `
+        });
     },
 
     submitUser: function(evt) {
+        if (Kiosk.currentChoices.length === 0) return;
+
         Kiosk.currentUser.addChoices(Kiosk.currentChoices).save();
 
         Kiosk.currentUser = Kiosk.objects.users.new();
@@ -75,6 +85,10 @@ Kiosk.views.QuestionList = Kiosk.views.Base.extend({
             this.$el.append(new Kiosk.views.QuestionBlock({ model: questionModel }).render().$el);
         }.bind(this));
 
+        this.$el.append(`
+            <div class="footer">Kiosk created by <a href="http://thesephist.com">Linus Lee</a> for <a href="http://tedxpurdueu.com">TEDxPurdueU</a></div>
+        `)
+
         return this;
     }
 
@@ -92,10 +106,6 @@ Kiosk.views.QuestionBlock = Kiosk.views.Base.extend({
 
       </div>
     `,
-
-    initialize: function() {
-
-    },
 
     render: function() {
         this.$el.html(this.template);
@@ -143,10 +153,6 @@ Kiosk.views.Choice = Kiosk.views.Base.extend({
         'click input': 'checkClick'
     },
 
-    initialize: function() {
-
-    },
-
     checkClick: function(evt) {
         if (evt.target.checked) {
             Kiosk.currentChoices.push(this.model.id);
@@ -159,6 +165,62 @@ Kiosk.views.Choice = Kiosk.views.Base.extend({
         this.$el.html(this.template);
         this.$('input').val(this.model.id);
         this.$('label').html(this.model.get('value'));
+
+        return this;
+    }
+
+});
+
+
+Kiosk.views.Modal =  Kiosk.views.Base.extend({
+
+    className: 'modal',
+
+    title: null,
+    body: null,
+    open: null,
+
+    template: `
+    <span class="title"></span>
+    <span class="body"></span>
+    <button class="okButton">OK</button>`,
+
+    events: {
+        'click .okButton': 'close'
+    },
+
+    initialize: function() {
+        // this is done in initialize() so as to preserve DOM elements between states
+        this.$el.html(this.template);
+    },
+
+    open: function(options) {
+        this.title = options.title || null;
+        this.body = options.body || null;
+
+        this.render({ open: true });
+    },
+
+    close: function(evt) {
+        this.render({ open: false });
+    },
+
+    render: function(options) {
+        if (options === undefined) options = { open: false };
+
+        this.$('.title').html(this.title || 'Kiosk');
+        this.$('.body').html(this.body || '');
+
+        options.open ? this.$el.addClass('open') : this.$el.removeClass('open');
+
+        if (options.open) {
+            this.$el.addClass('open');
+            this.$('.okButton').attr('tabindex', 1);
+            this.$('.okButton').focus();
+        } else {
+            this.$el.removeClass('open');
+            this.$('.okButton').attr('tabindex', -1);
+        }
 
         return this;
     }

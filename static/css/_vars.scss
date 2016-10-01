@@ -30,13 +30,13 @@ $text-color: #666;
         color: #fff;
     }
 
-    &:hover, &:active {
-        box-shadow: 0 10px 8px -2px rgba(0, 0, 0, 0.3);
+    &:hover, &:focus {
+        box-shadow: 0 10px 12px -2px rgba(0, 0, 0, 0.3);
         transform: translateY(-3px);
         -webkit-transform: translateY(-3px);
     }
 
     &:active {
-        opacity: 0.7;
+        opacity: 0.85;
     }
 }

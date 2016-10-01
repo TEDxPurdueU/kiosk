@@ -17,7 +17,9 @@ Kiosk.currentChoices = [];
 // realize views
 Kiosk.header = new Kiosk.views.Header();
 Kiosk.questionList = new Kiosk.views.QuestionList();
+Kiosk.modal = new Kiosk.views.Modal();
 
 // attach views
 $("#content").append(Kiosk.header.render().$el)
-             .append(Kiosk.questionList.render().$el);
+             .append(Kiosk.questionList.render().$el)
+             .append(Kiosk.modal.render().$el);

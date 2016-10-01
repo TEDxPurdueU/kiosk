@@ -17,6 +17,12 @@
     color: #fff;
     padding: 0 10%;
     overflow: hidden;
+    z-index: 10;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
 
     .logo {
         height: $header-height;
@@ -39,6 +45,10 @@
     max-width: 800px;
     margin: 0 auto;
 
+    .question-block {
+        margin-bottom: 52px;
+    }
+
     .question {
         text-align: center;
         margin: 20px 0;
@@ -58,7 +68,7 @@
 
             input[type='checkbox'] {
                 position: relative;
-                height: calc(100px - 12px);
+                height: 88px;
                 width: calc(100% - 12px);
                 margin: 6px;
                 cursor: pointer;
@@ -72,7 +82,11 @@
                     left: 0;
                     border-radius: 4px;
                     background: #e9e9e9;
-                    transition: background .4s;
+                    transition: background .25s;
+                }
+
+                &:hover::after, &:focus::after {
+                    background: #bbb;
                 }
 
                 &:checked::after {
@@ -87,7 +101,6 @@
             label {
                 position: absolute;
                 display: block;
-                font-size: 20px;
                 top: 0;
                 left: 0;
                 width: 100%;
@@ -95,9 +108,112 @@
                 pointer-events: none;
                 text-align: center;
                 line-height: 100px;
+                font-size: 24px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
         }
+    }
+
+    .footer {
+        text-align: center;
+        width: 100%;
+        color: #777;
+        font-size: 18px;
+        margin-bottom: 28px;
+
+        a {
+            color: $brand-color;
+
+            &:hover {
+                opacity: .9;
+            }
+        }
+    }
+}
+
+.modal {
+    position: fixed;
+    display: block;
+    overflow: visible;
+    width: 300px;
+    height: auto;
+    min-height: 140px;
+    top: 200px;
+    left: calc(50vw - 150px);
+    z-index: 30;
+    color: #000;
+
+    // closed state styles
+    pointer-events: none;
+    opacity: 0;
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    transition: transform .3s ease-out, -webkit-transform .3s ease-out, opacity .3s;
+
+    &.open {
+        // open state styles
+        pointer-events: all;
+        opacity: 1;
+        transform: scale(1);
+        -webkit-transform: scale(1);
+    }
+
+    &::before, &::after {
+        content: '';
+        display: block;
+        position: absolute;
+        z-index: -1;
+    }
+
+    &::before {
+        height: 140vh;
+        width: 140vw;
+        background: rgba(0, 0, 0, 0.3);
+        top: -268px;
+        left: calc(150px - 70vw);
+    }
+
+    &::after {
+        // actually visible window area
+        height: calc(100% + 24px);
+        width: calc(100% + 24px);
+        box-shadow: 0 10px 16px -2px rgba(0, 0, 0, 0.3);
+        top: -12px;
+        left: -12px;
+        background: #fff;
+    }
+
+    .title {
+        display: block;
+        position: absolute;
+        font-size: 28px;
+        height: 50px;
+        width: calc(100% + 24px);
+        left: -12px;
+        top: -12px;
+        padding: 8px 12px;
+        box-sizing: border-box;
+        background: $brand-color;
+        line-height: 34px;
+        color: #fff;
+    }
+
+    .body {
+        display: block;
+        margin-top: 48px;
+        margin-bottom: 68px;
+        font-size: 20px;
+    }
+
+    .okButton {
+        @include brand-button;
+        // positioning stuff
+        position: absolute;
+        right: 0;
+        bottom: 0;
     }
 }
 
@@ -105,6 +221,27 @@
 
     .header {
         padding: 0 12px;
+    }
+
+    .question-list .question {
+        font-size: 28px;
+    }
+
+    .question-list .choices .choice {
+        width: 100%;
+
+        input[type="checkbox"] {
+            height: 48px;
+        }
+
+        label {
+            line-height: 60px;
+            font-size: 20px;
+        }
+
+        footer {
+            font-size: 16px;
+        }
     }
 
 }
