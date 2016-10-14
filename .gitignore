@@ -38,3 +38,6 @@ jspm_packages
 
 # db.json for static database
 db.json
+
+# yarn lockfile
+yarn.lock
